@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Lab3 {
-    internal class Sentance {
+    internal class Sentence {
         List<Word> Words;
         bool isInterrogativeSentance;
         private Queue<char> punctuation;
         public int lengthSentence { get; private set; }
 
-        public Sentance() {
+        public Sentence() {
             lengthSentence = 0;
             punctuation = new Queue<char>();  
             Words = new List<Word>();

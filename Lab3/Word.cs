@@ -4,9 +4,8 @@ using System.Text;
 
 namespace Lab3 {
     internal class Word {
-        public String word { get; }
-        
-        bool hasPunctuationNext;
+        public string word { get; }
+        public bool hasPunctuationNext { get; }
         public Word(string word,bool punctuation) {
             this.word = word;
             hasPunctuationNext = punctuation;

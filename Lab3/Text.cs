@@ -4,11 +4,14 @@ using System.Text;
 
 namespace Lab3 {
     internal class Text {
-        List<Sentance> Sentances;
+        List<Sentence> Sentances;
         String StopWords = "stopwords_ru.txt";
+        
+        public Text() {
+            Sentances = new List<Sentence>();
+        }
 
-
-        public void addSentance(Sentance sentance) {
+        public void addSentance(Sentence sentance) {
             if (sentance != null)
                 Sentances.Add(sentance);
             else

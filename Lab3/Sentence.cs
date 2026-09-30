@@ -15,6 +15,14 @@ namespace Lab3 {
             punctuation = new Queue<char>();  
             Words = new List<Word>();
         }
+        public void printSentance() {
+            for(int i = 0; i < Words.Count; i++) {
+                Console.Write(Words[i].word);
+                char p;
+                if(Words[i].hasPunctuationNext && punctuation.TryDequeue(out p)) Console.Write(p);
+                Console.Write(" ");
+            } 
+        }
         public void addWord(Word word) {
             if (word != null) {
                 Words.Add(word);

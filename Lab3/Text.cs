@@ -5,10 +5,15 @@ using System.Text;
 namespace Lab3 {
     internal class Text {
         List<Sentence> Sentances;
-        String StopWords = "stopwords_ru.txt";
         
         public Text() {
             Sentances = new List<Sentence>();
+        }
+
+        public void printText() {
+            foreach (Sentence sentence in Sentances) {
+                sentence.printSentance();
+            }
         }
 
         public void addSentance(Sentence sentance) {

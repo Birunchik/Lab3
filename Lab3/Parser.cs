@@ -20,7 +20,7 @@ namespace Lab3 {
                 StringBuilder word = new StringBuilder();
                 while ((line = reader.ReadLine()) != null) {
                     for(int i = 0; i < line.Length; i++) {
-                        char symbol = line[i]; 
+                        char symbol = line[i];
                         // склеивание слова 
                         if (char.IsLetterOrDigit(symbol) || symbol == '-') {
                             word.Append(symbol);
@@ -29,18 +29,22 @@ namespace Lab3 {
                         else if(endSentncePunctuation.Contains(symbol)) {
                             if(word.Length > 0) {
                                 sentence.addWord(new Word(word.ToString(),true));
+                                sentence.addPunctuation(symbol);
+                                word.Clear();
                             }
-                            sentence.addPunctuation(symbol);
+                            
                             parsedText.addSentance(sentence);
                             sentence = new Sentence();
                         }
                         // пунктуация
                         else {
+                            bool isntSpace = (symbol != ' ');
                             if (word.Length > 0) {
-                                sentence.addWord(new Word(word.ToString(), true));
+                                sentence.addWord(new Word(word.ToString(),isntSpace ));
+
+                                if(isntSpace)sentence.addPunctuation(symbol);;
                                 word.Clear();
                             }
-                            if(symbol != ' ')sentence.addPunctuation(symbol);
                         }
                     }
                     if (word.Length > 0) {

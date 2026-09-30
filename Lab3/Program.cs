@@ -2,7 +2,9 @@
 
 namespace Lab3 {
     class Programm {
-        public static void main(String[] args) {
+        public static void Main(String[] args) {
+            Text RandomText = Parser.parse("text.txt");
+            RandomText.printText();
 
         }
     }

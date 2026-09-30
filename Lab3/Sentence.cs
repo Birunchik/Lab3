@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Lab3 {
     internal class Sentence {
-        List<Word> Words;
-        bool isInterrogativeSentance;
+        public List<Word> Words { get; }
+        public bool isInterrogativeSentance { get; private set; }
         private Queue<char> punctuation;
         public int lengthSentence { get; private set; }
 
@@ -19,8 +19,11 @@ namespace Lab3 {
             for(int i = 0; i < Words.Count; i++) {
                 Console.Write(Words[i].word);
                 char p;
-                if(Words[i].hasPunctuationNext && punctuation.TryDequeue(out p)) Console.Write(p);
-                Console.Write(" ");
+                if (Words[i].hasPunctuationNext && punctuation.TryDequeue(out p)) {
+                    Console.Write(p);
+                    punctuation.Enqueue(p);
+                }
+                    Console.Write(" ");
             } 
         }
         public void addWord(Word word) {
@@ -32,7 +35,6 @@ namespace Lab3 {
         }
         public void addPunctuation(char punctuation) {
             this.punctuation.Enqueue(punctuation);
-            lengthSentence++;
             if( punctuation == '?') isInterrogativeSentance = true;
         }
     }

@@ -22,7 +22,7 @@ namespace Lab3 {
                     for(int i = 0; i < line.Length; i++) {
                         char symbol = line[i];
                         // склеивание слова 
-                        if (char.IsLetterOrDigit(symbol) || symbol == '-') {
+                        if (char.IsLetterOrDigit(symbol) || symbol == '-' || symbol == '\'') {
                             word.Append(symbol);
                         }
                         // конец предложения, инициализация нового 

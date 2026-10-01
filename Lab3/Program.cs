@@ -8,12 +8,18 @@ namespace Lab3 {
             Console.WriteLine();
             RandomText.printByLengthOrder();
             Console.WriteLine();
+
             RandomText.findInInInterrogativeSentaceWordsWithLength(4);    
-            RandomText.printText();
-            Console.Clear();
 
             Text testF = RandomText.deleteAllСonsonantWordsWithLenth(5);
             testF.printText();
+
+
+            RandomText.replaceWordsInSentanceWithLength(2, 5,"fffff");
+            RandomText.printText();
+            Console.Clear();
+            RandomText.deleteAllStopWords();
+            RandomText.printText();
 
         }
     }

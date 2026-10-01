@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Lab3 {
     internal class Sentence {
-        public List<Word> Words { get; }
+        public List<Word> Words { get; internal set; }
         public bool isInterrogativeSentance { get; private set; }
         public Queue<char> punctuation { get; }
         public int lengthSentence { get; private set; }

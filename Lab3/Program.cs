@@ -10,6 +10,10 @@ namespace Lab3 {
             Console.WriteLine();
             RandomText.findInInInterrogativeSentaceWordsWithLength(4);    
             RandomText.printText();
+            Console.Clear();
+
+            Text testF = RandomText.deleteAllСonsonantWordsWithLenth(5);
+            testF.printText();
 
         }
     }

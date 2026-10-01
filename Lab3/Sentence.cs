@@ -7,7 +7,7 @@ namespace Lab3 {
     internal class Sentence {
         public List<Word> Words { get; }
         public bool isInterrogativeSentance { get; private set; }
-        private Queue<char> punctuation;
+        public Queue<char> punctuation { get; }
         public int lengthSentence { get; private set; }
 
         public Sentence() {

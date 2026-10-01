@@ -107,11 +107,40 @@ namespace Lab3 {
                 }
             }
         }
-        public void deleteAllСonsonantWordsWithLenth(int lengthWord) {
-
+        public Text deleteAllСonsonantWordsWithLenth(int lengthWord) {
+            Text textWithoutConsonantWords = new Text();
+            Sentence newSentence = new Sentence(); 
+            HashSet<char> consonantHashSet = new HashSet<char>();
+            initConsonantHashSet(consonantHashSet);
+            foreach (Sentence sentence in Sentances) {
+                foreach (Word word in sentence.Words) {
+                    string wordString = word.word.ToLower();
+                    if (!consonantHashSet.Contains(wordString[0]) || wordString.Length !=lengthWord) {
+                        newSentence.Words.Add(word);
+                        if (word.hasPunctuationNext)
+                            newSentence.addPunctuation(sentence.punctuation.Dequeue());
+                    }
+                    else
+                        if(word.hasPunctuationNext)sentence.punctuation.Dequeue();
+                }
+                textWithoutConsonantWords.addSentance(newSentence);
+                newSentence = new Sentence();
+            }
+            return textWithoutConsonantWords;
         }
-        public void replaceWordsInSentanceWithLength(int numSentance, int lengthWord) {
+        private void initConsonantHashSet(HashSet<char> set) {
+            var chars = new[] { 'б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к', 'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ',
+                                'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z'};
+            set.UnionWith(chars);
+        }
 
+        public void replaceWordsInSentanceWithLength(int numSentance, int lengthWord, string substring) {
+            foreach(Word word in Sentances[numSentance].Words) {
+                if(word.word.Length == lengthWord) {
+                    word.word = substring;
+                }
+            }
+            
         }
         public void deleteAllStopWords() {
 

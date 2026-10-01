@@ -29,9 +29,9 @@ namespace Lab3 {
                         else if (endSentncePunctuation.Contains(symbol)) {
                             if (word.Length > 0) {
                                 sentence.addWord(word.ToString());
+                                sentence.addPunctuation(symbol);
                                 word.Clear();
                             }
-                            sentence.addPunctuation(symbol);
 
                             parsedText.addSentance(sentence);
                             sentence = new Sentence();

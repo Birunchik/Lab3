@@ -76,6 +76,7 @@ namespace Lab3 {
          Sentence newSentence = new Sentence();
          HashSet<char> consonantHashSet = new HashSet<char>();
          initConsonantHashSet(consonantHashSet);
+         Console.WriteLine($"All Consonant Words with lengt:{lengthWord} has been deleted:");
          foreach (Sentence sentence in Sentances) {
             foreach (var word in sentence.sentence) {
                if (word is string str) {
@@ -96,6 +97,7 @@ namespace Lab3 {
          int idx = numSentance - 1;
          if (idx < 0 || idx > Sentances.Count)
             return;
+         Console.WriteLine($"All words with length:{lengthWord} in {numSentance} sentance has been replaced by \"{substring}\"");
          foreach (var word in Sentances[idx].sentence) {
             if (word is string str) {
                if (str.Length == lengthWord) {
@@ -108,7 +110,6 @@ namespace Lab3 {
                Sentances[idx].sentence[i] = substring;
             }
          }
-
       }
 
 
@@ -118,9 +119,10 @@ namespace Lab3 {
          HashSet<string> stopWords = new HashSet<string>();
          Sentence newSentence = new Sentence();
          initStopWords(stopWords);
+         Console.WriteLine("All stop words has been deleted");
          for (int i = 0; i < Sentances.Count; i++) {
             foreach (var word in Sentances[i].sentence) {
-               if (word is string str && !stopWords.Contains(str)) {
+               if (word is string str && !stopWords.Contains(str.ToLowerInvariant())) {
                   newSentence.addWord(str);
                }
                if (word is char punc) {
@@ -137,8 +139,45 @@ namespace Lab3 {
          {
             Indent = true
          };
+         Console.WriteLine($"Text has been serialize to file \"{path}\"");
          using (var writer = System.Xml.XmlWriter.Create(path,settings)) {
             serializer.Serialize(writer, this);
+         }
+      }
+      internal class WordInfo {
+         public int Frequency { get; set; } = 0;
+         public SortedSet<int> SentenceNumbers { get; set; } = new SortedSet<int>();
+      }
+      private SortedDictionary<string, WordInfo> BuildConcordance() {
+         SortedDictionary<string, WordInfo> concordance = new SortedDictionary<string, WordInfo>(StringComparer.OrdinalIgnoreCase);
+         for (int i = 0; i < Sentances.Count; i++) {
+            int sentenceNumber = i + 1;
+
+            foreach (var word in Sentances[i].sentence) {
+               if (word is string str) {
+                  string lowerWord = str.ToLowerInvariant();
+
+                  if (!concordance.ContainsKey(lowerWord)) {
+                     concordance[lowerWord] = new WordInfo();
+                  }
+                  concordance[lowerWord].Frequency++;
+                  concordance[lowerWord].SentenceNumbers.Add(sentenceNumber);
+               }
+            }
+         }
+         return concordance;
+      }
+      public void PrintConcordance() {
+         SortedDictionary<string, WordInfo> concordance = BuildConcordance();
+
+         foreach (var element in concordance) {
+            string word = element.Key;
+            int freq = element.Value.Frequency;
+            string sentenceNums = string.Join(" ", element.Value.SentenceNumbers);
+            int totalLength = 25;
+            string padding = new string('.', Math.Max(1, totalLength - word.Length));
+
+            Console.WriteLine($"{word}{padding}{freq}: {sentenceNums}");
          }
       }
 

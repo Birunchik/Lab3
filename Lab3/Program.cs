@@ -19,13 +19,14 @@ namespace Lab3 {
          withoutConcosant.printText();
          Console.WriteLine();
 
-         //parsedText.replaceWordsInSentanceWithLength(1, 5, "kgfjbkldfb");
-         //parsedText.printText();
+         parsedText.replaceWordsInSentanceWithLength(1, 5, "kgfjbkldfb");
+         parsedText.printText();
 
          parsedText.deleteAllStopWords();
          parsedText.printText();
 
          parsedText.exportXMLdoc("res.xml");
+         parsedText.PrintConcordance();
          
       }
    }

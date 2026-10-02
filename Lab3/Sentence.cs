@@ -13,6 +13,7 @@ namespace Lab3 {
          set {
          }
       }
+      
       [XmlIgnore]
       public int countWords { get; private set; }
       [XmlIgnore]
